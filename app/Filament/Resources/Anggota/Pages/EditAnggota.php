@@ -16,4 +16,22 @@ class EditAnggota extends EditRecord
             DeleteAction::make(),
         ];
     }
+
+    protected function mutateFormDataBeforeFill(array $data): array
+    {
+        $data['name'] = $this->record->user->name;
+        $data['role'] = $this->record->user->role;
+
+        return $data;
+    }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $this->record->user->update([
+            'name' => $data['name'],
+            'role' => $data['role'],
+        ]);
+
+        return $data;
+    }
 }

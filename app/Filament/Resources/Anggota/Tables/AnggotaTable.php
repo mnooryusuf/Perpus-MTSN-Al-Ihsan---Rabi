@@ -14,14 +14,28 @@ class AnggotaTable
     {
         return $table
             ->columns([
-                TextColumn::make('user_id')
-                    ->numeric()
+                TextColumn::make('user.name')
+                    ->label('Nama')
+                    ->searchable()
                     ->sortable(),
                 TextColumn::make('nis_nip')
+                    ->label('NIS/NIP')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('user.role')
+                    ->label('Role')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'guru' => 'success',
+                        'siswa' => 'info',
+                        default => 'gray',
+                    })
                     ->searchable(),
                 TextColumn::make('kelas')
+                    ->label('Kelas')
                     ->searchable(),
                 TextColumn::make('no_hp')
+                    ->label('No. HP')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

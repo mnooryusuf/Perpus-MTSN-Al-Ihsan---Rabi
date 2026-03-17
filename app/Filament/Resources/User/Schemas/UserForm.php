@@ -31,6 +31,7 @@ class UserForm
                     ->label('Kata Sandi')
                     ->placeholder('********')
                     ->password()
+                    ->revealable()
                     ->required(),
                 Select::make('role')
                     ->label('Peran / Jabatan')

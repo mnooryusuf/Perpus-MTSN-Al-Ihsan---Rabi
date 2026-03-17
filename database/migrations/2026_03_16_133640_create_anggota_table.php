@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('anggota', function (Blueprint $table) {
-            $table->id('id_anggota');
+            $table->string('nis_nip')->primary();
             $table->foreignId('user_id')->constrained('user')->onDelete('cascade');
-            $table->string('nis_nip')->unique();
             $table->string('kelas')->nullable();
             $table->text('alamat')->nullable();
             $table->string('no_hp')->nullable();

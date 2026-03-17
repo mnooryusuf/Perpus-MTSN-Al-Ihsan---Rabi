@@ -16,8 +16,9 @@ class TransaksiForm
                 Select::make('id_anggota')
                     ->label('Anggota')
                     ->relationship('anggota', 'nis_nip')
-                    ->searchable()
-                    ->placeholder('Pilih anggota (NIS/NIP)...')
+                    ->getOptionLabelFromRecordUsing(fn ($record) => "{$record->nis_nip} - {$record->user->name}")
+                    ->searchable(['nis_nip', 'user.name'])
+                    ->placeholder('Cari berdasarkan NIS/NIP atau Nama...')
                     ->required(),
                 Select::make('id_buku')
                     ->label('Buku')

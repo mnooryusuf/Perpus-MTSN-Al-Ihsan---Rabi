@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('transaksi', function (Blueprint $table) {
             $table->id('id_transaksi');
-            $table->foreignId('id_anggota')->constrained('anggota', 'id_anggota')->onDelete('cascade');
+            $table->string('id_anggota');
+            $table->foreign('id_anggota')->references('nis_nip')->on('anggota')->onDelete('cascade');
             $table->foreignId('id_buku')->constrained('buku', 'id_buku')->onDelete('cascade');
             $table->foreignId('id_user')->constrained('user')->onDelete('cascade');
             $table->date('tanggal_pinjam');
