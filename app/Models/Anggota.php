@@ -28,4 +28,11 @@ class Anggota extends Model
     {
         return $this->hasMany(Transaksi::class, 'id_anggota');
     }
+
+    public function getActiveLoansCountAttribute()
+    {
+        return $this->transaksis()
+            ->whereIn('status', ['dipinjam', 'terlambat'])
+            ->count();
+    }
 }

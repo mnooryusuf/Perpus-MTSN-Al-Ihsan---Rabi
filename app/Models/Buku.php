@@ -22,4 +22,13 @@ class Buku extends Model
     {
         return $this->hasMany(Transaksi::class, 'id_buku');
     }
+
+    public function getAvailableStockAttribute()
+    {
+        $activeLoans = $this->transaksis()
+            ->whereIn('status', ['dipinjam', 'terlambat'])
+            ->count();
+
+        return max(0, $this->jumlah_eksemplar - $activeLoans);
+    }
 }

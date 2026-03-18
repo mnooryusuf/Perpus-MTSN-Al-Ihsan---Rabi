@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Transaksi\Tables;
 
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -56,6 +57,20 @@ class TransaksiTable
                 //
             ])
             ->recordActions([
+                Action::make('kembalikan')
+                    ->label('Kembalikan')
+                    ->icon('heroicon-o-check-circle')
+                    ->color('success')
+                    ->requiresConfirmation()
+                    ->modalHeading('Kembalikan Buku')
+                    ->modalDescription('Apakah Anda yakin ingin menandai buku ini sebagai sudah dikembalikan hari ini?')
+                    ->action(function ($record) {
+                        $record->update([
+                            'tanggal_dikembalikan' => now(),
+                            'status' => 'dikembalikan',
+                        ]);
+                    })
+                    ->visible(fn ($record) => in_array($record->status, ['dipinjam', 'terlambat'])),
                 EditAction::make(),
             ])
             ->toolbarActions([
