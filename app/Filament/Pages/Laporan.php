@@ -62,12 +62,15 @@ class Laporan extends Page implements HasForms
         $end = $this->data['end_date'] ?? now()->endOfMonth();
 
         return [
-            'total_buku' => Buku::sum('jumlah_eksemplar'),
-            'total_pinjam' => Transaksi::whereBetween('tanggal_pinjam', [$start, $end])->count(),
+            'total_buku'    => Buku::sum('jumlah_eksemplar'),
+            'total_pinjam'  => Transaksi::whereBetween('tanggal_pinjam', [$start, $end])->count(),
             'total_kembali' => Transaksi::whereBetween('tanggal_dikembalikan', [$start, $end])->count(),
-            'terlambat' => Transaksi::whereNull('tanggal_dikembalikan')
+            'terlambat'     => Transaksi::whereNull('tanggal_dikembalikan')
                 ->where('tanggal_kembali', '<', now())
                 ->count(),
+            'total_denda'   => Transaksi::whereBetween('tanggal_dikembalikan', [$start, $end])
+                ->where('denda', '>', 0)
+                ->sum('denda'),
         ];
     }
 

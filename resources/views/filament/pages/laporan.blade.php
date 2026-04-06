@@ -3,7 +3,7 @@
     <div class="print:hidden" style="display:flex; flex-direction:column; gap:1.5rem;">
 
         {{-- Stats Grid --}}
-        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem;">
+        <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:1.25rem;">
 
             {{-- Total Buku --}}
             <div style="position:relative; overflow:hidden; padding:1.5rem; background:white; border-radius:1rem; box-shadow:0 1px 3px rgba(0,0,0,.08); border:1px solid #e5e7eb; transition:box-shadow .2s;"
@@ -88,6 +88,21 @@
                     </svg>
                 </div>
             </div>
+            {{-- Total Denda --}}
+            <div style="position:relative; overflow:hidden; padding:1.5rem; background:white; border-radius:1rem; box-shadow:0 1px 3px rgba(0,0,0,.08); border:1px solid #fde8d8; transition:box-shadow .2s;"
+                 onmouseover="this.style.boxShadow='0 4px 12px rgba(249,115,22,.15)'" onmouseout="this.style.boxShadow='0 1px 3px rgba(0,0,0,.08)'">
+                <div style="display:flex; align-items:center; gap:1rem;">
+                    <div style="padding:.75rem; background:#fff7ed; border-radius:.75rem; color:#ea580c; flex-shrink:0;">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:1.5rem;height:1.5rem;">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p style="font-size:.8rem; font-weight:500; color:#6b7280; margin:0;">Total Denda</p>
+                        <p style="font-size:1.35rem; font-weight:700; color:#ea580c; margin:0; line-height:1.2;">Rp {{ number_format($stats['total_denda'], 0, ',', '.') }}</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         {{-- Filter & Action Section --}}
@@ -164,8 +179,14 @@
                         <td style="border:1px solid black; padding:.6rem .75rem; text-align:center; font-weight:700;">{{ $stats['total_kembali'] }}</td>
                         <td style="border:1px solid black; padding:.6rem .75rem; font-style:italic;">Transaksi masuk</td>
                     </tr>
+                    <tr>
+                        <td style="border:1px solid black; padding:.6rem .75rem; text-align:center;">4</td>
+                        <td style="border:1px solid black; padding:.6rem .75rem; text-transform:uppercase; font-weight:600;">Total Denda Keterlambatan</td>
+                        <td style="border:1px solid black; padding:.6rem .75rem; text-align:center; font-weight:700;">Rp {{ number_format($stats['total_denda'], 0, ',', '.') }}</td>
+                        <td style="border:1px solid black; padding:.6rem .75rem; font-style:italic;">Akumulasi periode</td>
+                    </tr>
                     <tr style="color:#b91c1c;">
-                        <td style="border:1px solid black; padding:.6rem .75rem; text-align:center; border-top:2px double black;">4</td>
+                        <td style="border:1px solid black; padding:.6rem .75rem; text-align:center; border-top:2px double black;">5</td>
                         <td style="border:1px solid black; padding:.6rem .75rem; text-transform:uppercase; font-weight:600; font-style:italic; border-top:2px double black;">Buku Belum Kembali (Terlambat)</td>
                         <td style="border:1px solid black; padding:.6rem .75rem; text-align:center; font-weight:700; text-decoration:underline; border-top:2px double black;">{{ $stats['terlambat'] }}</td>
                         <td style="border:1px solid black; padding:.6rem .75rem; font-style:italic; border-top:2px double black;">Perlu tindak lanjut</td>

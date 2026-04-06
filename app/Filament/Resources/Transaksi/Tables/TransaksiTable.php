@@ -39,11 +39,18 @@ class TransaksiTable
                 TextColumn::make('status')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
-                        'dipinjam' => 'warning',
+                        'dipinjam'     => 'warning',
                         'dikembalikan' => 'success',
-                        'terlambat' => 'danger',
-                        default => 'gray',
+                        'terlambat'    => 'danger',
+                        default        => 'gray',
                     }),
+                TextColumn::make('denda')
+                    ->label('Denda')
+                    ->formatStateUsing(fn ($state) => $state > 0
+                        ? 'Rp ' . number_format($state, 0, ',', '.')
+                        : '-')
+                    ->color(fn ($state) => $state > 0 ? 'danger' : 'gray')
+                    ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -63,11 +70,13 @@ class TransaksiTable
                     ->color('success')
                     ->requiresConfirmation()
                     ->modalHeading('Kembalikan Buku')
-                    ->modalDescription('Apakah Anda yakin ingin menandai buku ini sebagai sudah dikembalikan hari ini?')
+                    ->modalDescription(fn ($record) => 'Denda yang akan dikenakan: Rp ' . number_format($record->hitungDenda(), 0, ',', '.') . '. Apakah Anda yakin?')
                     ->action(function ($record) {
+                        $denda = $record->hitungDenda();
                         $record->update([
                             'tanggal_dikembalikan' => now(),
-                            'status' => 'dikembalikan',
+                            'status'               => 'dikembalikan',
+                            'denda'                => $denda,
                         ]);
                     })
                     ->visible(fn ($record) => in_array($record->status, ['dipinjam', 'terlambat'])),
