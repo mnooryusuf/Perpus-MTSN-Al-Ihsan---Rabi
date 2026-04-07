@@ -1,6 +1,34 @@
 <x-filament-panels::page>
+<style>
+    /* ===== PRINT STYLES ===== */
+
+    @media print {
+        /* Sembunyikan semua elemen Filament */
+        nav, aside, header,
+        .fi-sidebar,
+        .fi-topbar,
+        .fi-header,
+        [class*="fi-sidebar"],
+        [class*="fi-topbar"],
+        [class*="fi-header"],
+        [class*="fi-breadcrumbs"] { display: none !important; }
+
+        /* Reset layout halaman agar tidak ada margin/padding dari Filament */
+        body, html { margin: 0 !important; padding: 0 !important; background: white !important; }
+        main, .fi-main, .fi-body { padding: 0 !important; margin: 0 !important; }
+
+        /* Sembunyikan UI web, tampilkan dokumen cetak */
+        #laporan-web-ui  { display: none !important; }
+        #laporan-cetak   { display: block !important; }
+
+        /* Pastikan tabel tidak terpotong halaman */
+        table { page-break-inside: avoid; }
+        tr    { page-break-inside: avoid; }
+    }
+</style>
+
     {{-- Non-Printable UI --}}
-    <div class="print:hidden" style="display:flex; flex-direction:column; gap:1.5rem;">
+    <div id="laporan-web-ui" style="display:flex; flex-direction:column; gap:1.5rem;">
 
         {{-- Stats Grid --}}
         <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:1.25rem;">
@@ -130,13 +158,13 @@
     </div>
 
     {{-- Printable Document (Hidden in Web, Only for Printer) --}}
-    <div class="hidden print:block" style="font-family:Georgia,serif; background:white; color:black; padding:3rem;">
+    <div id="laporan-cetak" style="font-family:Georgia,serif; background:white; color:black; padding:3rem;">
         {{-- KOP SURAT --}}
         <div style="display:flex; align-items:center; justify-content:center; border-bottom:4px double black; padding-bottom:1rem; margin-bottom:1.5rem;">
             <div style="text-align:center;">
                 <h1 style="font-size:1.1rem; font-weight:800; text-transform:uppercase; letter-spacing:.05em; margin:0;">KEMENTERIAN AGAMA REPUBLIK INDONESIA</h1>
                 <h2 style="font-size:1rem; font-weight:700; text-transform:uppercase; margin:.15rem 0;">MADRASAH TSANAWIYAH NEGERI AL IHSAN - RABI</h2>
-                <p style="font-size:.8rem; font-style:italic; margin:.1rem 0;">Jl. Raya Rabi No. 123, Pekalongan, Jawa Tengah</p>
+                <p style="font-size:.8rem; font-style:italic; margin:.1rem 0;">Gambah Dalam, Kec. Kandangan, Kabupaten Hulu Sungai Selatan, Kalimantan Selatan</p>
                 <p style="font-size:.8rem; font-weight:600; margin:.1rem 0;">Gedung Perpustakaan - Sistem Manajemen Digital</p>
             </div>
         </div>

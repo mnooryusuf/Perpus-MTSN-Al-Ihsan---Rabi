@@ -37,7 +37,7 @@ class Transaksi extends Model
 
         $hariTerlambat = $batasKembali->diffInDays($dikembalikan, false);
 
-        return $hariTerlambat > 0 ? $hariTerlambat * 1000 : 0;
+        return $hariTerlambat > 0 ? $hariTerlambat * 2000 : 0;
     }
 
     public function anggota()
