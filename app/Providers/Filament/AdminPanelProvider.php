@@ -28,6 +28,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login(\App\Filament\Pages\Auth\Login::class)
+            ->profile()
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -41,6 +42,7 @@ class AdminPanelProvider extends PanelProvider
                 'Laporan',
                 'Master Data',
                 'Manajemen',
+                'Pengaturan',
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([])
