@@ -11,6 +11,8 @@ use SensitiveParameter;
 
 class Login extends BaseLogin
 {
+    protected static string $layout = 'filament.components.layout.login';
+
     public function form(Schema $schema): Schema
     {
         return $schema
