@@ -2,6 +2,8 @@
 
 namespace App\Filament\Widgets;
 
+use App\Models\User;
+use Filament\Facades\Filament;
 use Filament\Widgets\Widget;
 
 class WelcomeBanner extends Widget
@@ -29,12 +31,18 @@ class WelcomeBanner extends Widget
 
     public function getUserName(): string
     {
-        return auth()->user()->name ?? 'Pengguna';
+        /** @var User|null $user */
+        $user = Filament::auth()->user();
+
+        return $user?->name ?? 'Pengguna';
     }
 
     public function getUserRole(): string
     {
-        return auth()->user()->role ?? 'Pustakawan';
+        /** @var User|null $user */
+        $user = Filament::auth()->user();
+
+        return $user?->role ?? 'Pustakawan';
     }
 
     public function getCurrentDate(): string

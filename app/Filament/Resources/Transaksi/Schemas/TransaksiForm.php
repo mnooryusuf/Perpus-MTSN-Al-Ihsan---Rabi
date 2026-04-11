@@ -5,7 +5,7 @@ namespace App\Filament\Resources\Transaksi\Schemas;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Placeholder;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
 use App\Models\Anggota;
 use App\Models\Buku;
@@ -50,9 +50,10 @@ class TransaksiForm
                         
                         self::updateStatus($set, $get);
                     }),
-                Placeholder::make('member_info')
+                TextEntry::make('member_info')
                     ->label('Detail Anggota')
-                    ->content(function (callable $get) {
+                    ->html()
+                    ->state(function (callable $get) {
                         $id = $get('id_anggota');
                         if (!$id) return 'Silakan pilih anggota...';
                         $anggota = Anggota::find($id);
@@ -88,9 +89,10 @@ class TransaksiForm
                             }
                         },
                     ]),
-                Placeholder::make('book_info')
+                TextEntry::make('book_info')
                     ->label('Stok Buku')
-                    ->content(function (callable $get) {
+                    ->html()
+                    ->state(function (callable $get) {
                         $id = $get('id_buku');
                         if (!$id) return 'Silakan pilih buku...';
                         $buku = Buku::find($id);
@@ -133,9 +135,9 @@ class TransaksiForm
                         }
                     })
                     ->afterStateUpdated(fn (callable $set, callable $get) => self::updateStatus($set, $get)),
-                Placeholder::make('status_preview')
+                TextEntry::make('status_preview')
                     ->label('Status Otomatis')
-                    ->content(fn (callable $get) => ucfirst($get('status') ?? 'dipinjam'))
+                    ->state(fn (callable $get) => ucfirst($get('status') ?? 'dipinjam'))
                     ->extraAttributes(['class' => 'font-bold text-primary-600']),
                 \Filament\Forms\Components\Hidden::make('status')
                     ->default('dipinjam')
