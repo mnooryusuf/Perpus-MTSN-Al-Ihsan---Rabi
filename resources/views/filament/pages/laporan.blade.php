@@ -173,10 +173,14 @@
     {{-- Printable Document (Hidden in Web, Only for Printer) --}}
     <div id="laporan-cetak" style="font-family:Georgia,serif; background:white; color:black; padding:3rem;">
         {{-- KOP SURAT --}}
-        <div style="display:flex; align-items:center; justify-content:center; border-bottom:4px double black; padding-bottom:1rem; margin-bottom:1.5rem;">
-            <div style="text-align:center;">
+        {{-- KOP Surat --}}
+        <div style="display:flex; align-items:center; border-bottom:4px double black; padding-bottom:1rem; margin-bottom:1.5rem;">
+            <div style="flex: 0 0 15%; text-align:center;">
+                <img src="{{ asset('images/logo.png') }}" style="width: 80px; height: auto;" alt="Logo">
+            </div>
+            <div style="flex: 1; text-align:center; padding-right: 15%;">
                 <h1 style="font-size:1.1rem; font-weight:800; text-transform:uppercase; letter-spacing:.05em; margin:0;">KEMENTERIAN AGAMA REPUBLIK INDONESIA</h1>
-                <h2 style="font-size:1rem; font-weight:700; text-transform:uppercase; margin:.15rem 0;">MADRASAH TSANAWIYAH NEGERI AL IHSAN - RABI</h2>
+                <h2 style="font-size:1rem; font-weight:700; text-transform:uppercase; margin:.15rem 0;">MADRASAH TSANAWIYAH NEGERI AL IHSAN</h2>
                 <p style="font-size:.8rem; font-style:italic; margin:.1rem 0;">Gambah Dalam, Kec. Kandangan, Kabupaten Hulu Sungai Selatan, Kalimantan Selatan</p>
                 <p style="font-size:.8rem; font-weight:600; margin:.1rem 0;">Gedung Perpustakaan - Sistem Manajemen Digital</p>
             </div>
@@ -190,7 +194,7 @@
         </div>
 
         <div style="margin-bottom:2rem;">
-            <p style="margin-bottom:1rem; text-align:justify;">Berdasarkan data sirkulasi buku pada sistem manajemen perpustakaan digital MTSN Al Ihsan - Rabi, berikut adalah ringkasan aktivitas perpustakaan pada periode tersebut:</p>
+            <p style="margin-bottom:1rem; text-align:justify;">Berdasarkan data sirkulasi buku pada sistem manajemen perpustakaan digital MTSN Al Ihsan, berikut adalah ringkasan aktivitas perpustakaan pada periode tersebut:</p>
 
             <table style="width:100%; border-collapse:collapse; font-size:.85rem;">
                 <thead>

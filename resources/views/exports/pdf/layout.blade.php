@@ -33,7 +33,7 @@
             </td>
             <td style="width: 85%; text-align: center; border: none; padding: 0; padding-right: 15%;">
                 <h1 style="font-size: 13pt; font-weight: 800; text-transform: uppercase; margin: 0;">KEMENTERIAN AGAMA REPUBLIK INDONESIA</h1>
-                <h2 style="font-size: 12pt; font-weight: 700; text-transform: uppercase; margin: 2px 0;">MADRASAH TSANAWIYAH NEGERI AL IHSAN - RABI</h2>
+                <h2 style="font-size: 12pt; font-weight: 700; text-transform: uppercase; margin: 2px 0;">MADRASAH TSANAWIYAH NEGERI AL IHSAN</h2>
                 <p style="font-size: 9pt; font-style: italic; margin: 0;">Gambah Dalam, Kec. Kandangan, Kabupaten Hulu Sungai Selatan, Kalimantan Selatan</p>
                 <p style="font-size: 9pt; margin: 0;"><strong>Gedung Perpustakaan - Sistem Manajemen Digital</strong></p>
             </td>
