@@ -17,6 +17,8 @@ class ExportController extends Controller
 {
     public function export(Request $request)
     {
+        ini_set('memory_limit', '512M');
+        
         $type   = $request->query('type', 'buku');
         $format = $request->query('format', 'xlsx');
         $start  = $request->query('start', now()->startOfMonth()->format('Y-m-d'));

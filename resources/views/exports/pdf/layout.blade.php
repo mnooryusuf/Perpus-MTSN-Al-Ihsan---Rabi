@@ -26,15 +26,19 @@
     </style>
 </head>
 <body>
-    {{-- KOP SURAT --}}
-    <div class="kop">
-        <div>
-            <h1>KEMENTERIAN AGAMA REPUBLIK INDONESIA</h1>
-            <h2>MADRASAH TSANAWIYAH NEGERI AL IHSAN - RABI</h2>
-            <p class="italic">Gambah Dalam, Kec. Kandangan, Kabupaten Hulu Sungai Selatan, Kalimantan Selatan</p>
-            <p><strong>Gedung Perpustakaan - Sistem Manajemen Digital</strong></p>
-        </div>
-    </div>
+    <table style="width: 100%; border-bottom: 4px double #000; padding-bottom: 12px; margin-bottom: 20px; border: none;">
+        <tr>
+            <td style="width: 15%; text-align: center; border: none; padding: 0;">
+                <img src="{{ public_path('images/logo.png') }}" style="width: 80px; height: auto;" alt="Logo">
+            </td>
+            <td style="width: 85%; text-align: center; border: none; padding: 0; padding-right: 15%;">
+                <h1 style="font-size: 13pt; font-weight: 800; text-transform: uppercase; margin: 0;">KEMENTERIAN AGAMA REPUBLIK INDONESIA</h1>
+                <h2 style="font-size: 12pt; font-weight: 700; text-transform: uppercase; margin: 2px 0;">MADRASAH TSANAWIYAH NEGERI AL IHSAN - RABI</h2>
+                <p style="font-size: 9pt; font-style: italic; margin: 0;">Gambah Dalam, Kec. Kandangan, Kabupaten Hulu Sungai Selatan, Kalimantan Selatan</p>
+                <p style="font-size: 9pt; margin: 0;"><strong>Gedung Perpustakaan - Sistem Manajemen Digital</strong></p>
+            </td>
+        </tr>
+    </table>
 
     <div class="title-section">
         <h3>{{ $title }}</h3>
@@ -45,21 +49,23 @@
 
     <p class="footer">Dokumen ini digenerate secara otomatis oleh sistem perpustakaan digital MTSN Al Ihsan - Rabi.</p>
 
-    <div class="signature">
-        <div>
-            <p>Mengetahui,</p>
-            <p><strong>Kepala Perpustakaan</strong></p>
-            <div class="space"></div>
-            <p><strong>_________________________</strong></p>
-            <p>NIP. ..............................</p>
-        </div>
-        <div>
-            <p>Kandangan, {{ now()->translatedFormat('d F Y') }}</p>
-            <p><strong>Dibuat Oleh,</strong></p>
-            <div class="space"></div>
-            <p><strong>{{ Auth::user()->name ?? 'Pustakawan' }}</strong></p>
-            <p>NIP. {{ Auth::user()->username ?? '..............................' }}</p>
-        </div>
-    </div>
+    <table style="width: 100%; margin-top: 40px; border: none;">
+        <tr>
+            <td style="width: 50%; text-align: center; border: none; vertical-align: top;">
+                <p>Mengetahui,</p>
+                <p><strong>Kepala Perpustakaan</strong></p>
+                <div style="height: 60px;"></div>
+                <p><strong>_________________________</strong></p>
+                <p>NIP. ..............................</p>
+            </td>
+            <td style="width: 50%; text-align: center; border: none; vertical-align: top;">
+                <p>Kandangan, {{ now()->translatedFormat('d F Y') }}</p>
+                <p><strong>Dibuat Oleh,</strong></p>
+                <div style="height: 60px;"></div>
+                <p><strong>{{ Auth::user()->name ?? 'Pustakawan' }}</strong></p>
+                <p>NIP. {{ Auth::user()->username ?? '..............................' }}</p>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
