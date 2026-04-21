@@ -7,8 +7,8 @@ use BackedEnum;
 use UnitEnum;
 use App\Models\Buku;
 use App\Models\Transaksi;
-use App\Models\Anggota;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Select;
 use Filament\Schemas\Components\Section;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -31,6 +31,7 @@ class Laporan extends Page implements HasForms
     public function mount(): void
     {
         $this->form->fill([
+            'report_type' => 'peminjaman',
             'start_date' => now()->startOfMonth()->format('Y-m-d'),
             'end_date' => now()->endOfMonth()->format('Y-m-d'),
         ]);
@@ -40,17 +41,31 @@ class Laporan extends Page implements HasForms
     {
         return $form
             ->schema([
-                Section::make('Filter Periode Laporan')
-                    ->description('Pilih rentang tanggal untuk menghitung statistik secara live.')
+                Section::make('Pilih Jenis Laporan')
+                    ->description('Pilih jenis data yang ingin diekspor.')
                     ->schema([
+                        Select::make('report_type')
+                            ->label('Jenis Laporan')
+                            ->options([
+                                'buku'          => '📚 Laporan Data Buku',
+                                'anggota'       => '👥 Laporan Data Anggota',
+                                'peminjaman'    => '📤 Laporan Transaksi Peminjaman',
+                                'pengembalian'  => '📥 Laporan Transaksi Pengembalian',
+                            ])
+                            ->required()
+                            ->live()
+                            ->default('peminjaman')
+                            ->columnSpanFull(),
                         DatePicker::make('start_date')
                             ->label('Tanggal Mulai')
                             ->live()
-                            ->required(),
+                            ->required()
+                            ->visible(fn (callable $get) => in_array($get('report_type'), ['peminjaman', 'pengembalian'])),
                         DatePicker::make('end_date')
                             ->label('Tanggal Selesai')
                             ->live()
-                            ->required(),
+                            ->required()
+                            ->visible(fn (callable $get) => in_array($get('report_type'), ['peminjaman', 'pengembalian'])),
                     ])->columns(2),
             ])
             ->statePath('data');
@@ -83,8 +98,6 @@ class Laporan extends Page implements HasForms
     
     public function printLaporan()
     {
-        // In a real app, this would generate a PDF. 
-        // For now, we'll trigger a browser print of a simplified view.
         $this->js('window.print()');
     }
 }
