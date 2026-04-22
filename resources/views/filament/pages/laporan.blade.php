@@ -1,10 +1,11 @@
 <x-filament-panels::page>
 <style>
-    /* ===== PRINT STYLES ===== */
+    /* ===== SCREEN STYLES ===== */
 
+    /* ===== PRINT STYLES ===== */
     @media print {
-        /* Sembunyikan semua elemen Filament */
-        nav, aside, header,
+        /* Sembunyikan semua elemen navigasi Filament */
+        nav, aside, header, footer,
         .fi-sidebar,
         .fi-topbar,
         .fi-header,
@@ -13,13 +14,34 @@
         [class*="fi-header"],
         [class*="fi-breadcrumbs"] { display: none !important; }
 
-        /* Reset layout halaman agar tidak ada margin/padding dari Filament */
-        body, html { margin: 0 !important; padding: 0 !important; background: white !important; }
-        main, .fi-main, .fi-body { padding: 0 !important; margin: 0 !important; }
+        /* Atur ukuran margin kertas bawaan browser agar tidak memicu halaman baru */
+        @page { size: auto; margin: 5mm; }
+
+        /* Reset layout halaman agar tidak ada margin/padding/overflow/min-height dari Filament */
+        body, html { 
+            margin: 0 !important; 
+            padding: 0 !important; 
+            background: white !important; 
+            height: auto !important; 
+            min-height: 0 !important;
+            overflow: visible !important; 
+        }
+        
+        /* Hapus jarak-jarak dari wrapper bawaan Filament */
+        main, .fi-main, .fi-body, .fi-page, .fi-layout { 
+            padding: 0 !important; 
+            margin: 0 !important; 
+            display: block !important; 
+            height: auto !important; 
+            min-height: 0 !important;
+            overflow: visible !important; 
+            background: white !important;
+            box-shadow: none !important;
+        }
 
         /* Sembunyikan UI web, tampilkan dokumen cetak */
         #laporan-web-ui  { display: none !important; }
-        #laporan-cetak   { display: block !important; }
+        #laporan-cetak   { display: block !important; padding: 0 !important; margin: 0 !important; }
 
         /* Pastikan tabel tidak terpotong halaman */
         table { page-break-inside: avoid; }
