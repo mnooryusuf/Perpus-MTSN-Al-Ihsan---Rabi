@@ -273,7 +273,7 @@
                 <p style="margin:.15rem 0;">NIP. ..............................</p>
             </div>
             <div style="text-align:center; width:16rem;">
-                <p style="margin:0;">Pekalongan, {{ now()->translatedFormat('d F Y') }}</p>
+                <p style="margin:0;">Kandangan, {{ now()->translatedFormat('d F Y') }}</p>
                 <p style="font-weight:700; margin:.15rem 0;">Dibuat Oleh,</p>
                 <div style="height:5rem;"></div>
                 <p style="font-weight:700; text-transform:uppercase; margin:0;">{{ Auth::user()->name ?? 'Pustakawan' }}</p>

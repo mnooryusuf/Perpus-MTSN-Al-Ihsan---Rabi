@@ -33,7 +33,7 @@ class TransaksiForm
                     ->required()
                     ->afterStateUpdated(function ($state, callable $set, callable $get) {
                         if (!$state) return;
-                        $anggota = Anggota::find($state);
+                        $anggota = Anggota::find($state, ['*']);
                         if (!$anggota) return;
 
                         if ($anggota->active_loans_count >= 3) {
@@ -56,7 +56,7 @@ class TransaksiForm
                     ->state(function (callable $get) {
                         $id = $get('id_anggota');
                         if (!$id) return 'Silakan pilih anggota...';
-                        $anggota = Anggota::find($id);
+                        $anggota = Anggota::find($id, ['*']);
                         if (!$anggota) return 'Data tidak ditemukan.';
 
                         $role = ucfirst($anggota->user->role);
@@ -83,7 +83,7 @@ class TransaksiForm
                     ->rules([
                         fn () => function (string $attribute, $value, \Closure $fail) {
                             if (!$value) return;
-                            $buku = Buku::find($value);
+                            $buku = Buku::find($value, ['*']);
                             if ($buku && $buku->available_stock <= 0) {
                                 $fail('Maaf, stok buku ini sedang habis.');
                             }
@@ -95,7 +95,7 @@ class TransaksiForm
                     ->state(function (callable $get) {
                         $id = $get('id_buku');
                         if (!$id) return 'Silakan pilih buku...';
-                        $buku = Buku::find($id);
+                        $buku = Buku::find($id, ['*']);
                         if (!$buku) return 'Data tidak ditemukan.';
 
                         $stock = $buku->available_stock;
