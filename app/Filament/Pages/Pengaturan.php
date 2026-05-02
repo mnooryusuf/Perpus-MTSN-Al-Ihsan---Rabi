@@ -136,7 +136,7 @@ class Pengaturan extends Page implements HasForms
             'name'       => $formData['name'],
             'username'   => $formData['username'],
             'email'      => $formData['email'],
-            'avatar_url' => $formData['avatar'] ?? null,
+            'avatar_url' => is_array($formData['avatar']) ? (collect($formData['avatar'])->first()) : $formData['avatar'],
         ];
 
         if (filled($formData['password'] ?? null)) {
