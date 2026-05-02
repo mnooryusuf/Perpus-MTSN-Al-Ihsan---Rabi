@@ -29,7 +29,7 @@
     <table style="width: 100%; border-bottom: 4px double #000; padding-bottom: 12px; margin-bottom: 20px; border: none;">
         <tr>
             <td style="width: 15%; text-align: center; border: none; padding: 0;">
-                <img src="data:image/jpeg;base64,{{ base64_encode(file_get_contents(public_path('images/logo.jpg'))) }}" style="width: 80px; height: auto;" alt="Logo">
+                <img src="{{ public_path('images/logo.png') }}" style="width: 80px; height: auto;" alt="Logo">
             </td>
             <td style="width: 85%; text-align: center; border: none; padding: 0; padding-right: 15%;">
                 <h1 style="font-size: 13pt; font-weight: 800; text-transform: uppercase; margin: 0;">KEMENTERIAN AGAMA REPUBLIK INDONESIA</h1>

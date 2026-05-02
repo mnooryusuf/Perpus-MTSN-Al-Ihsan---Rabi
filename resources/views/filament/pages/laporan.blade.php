@@ -198,7 +198,7 @@
         {{-- KOP Surat --}}
         <div style="display:flex; align-items:center; border-bottom:4px double black; padding-bottom:1rem; margin-bottom:1.5rem;">
             <div style="flex: 0 0 15%; text-align:center;">
-                <img src="{{ asset('images/logo.jpg') }}" style="width: 80px; height: auto;" alt="Logo">
+                <img src="{{ asset('images/logo.png') }}" style="width: 80px; height: auto;" alt="Logo">
             </div>
             <div style="flex: 1; text-align:center; padding-right: 15%;">
                 <h1 style="font-size:1.1rem; font-weight:800; text-transform:uppercase; letter-spacing:.05em; margin:0;">KEMENTERIAN AGAMA REPUBLIK INDONESIA</h1>
