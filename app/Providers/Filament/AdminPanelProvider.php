@@ -30,7 +30,7 @@ class AdminPanelProvider extends PanelProvider
             ->login(\App\Filament\Pages\Auth\Login::class)
             ->profile()
             ->brandLogo(fn () => view('filament.components.brand-logo'))
-            ->favicon(asset('images/logo.png'))
+            ->favicon(asset('images/logo.jpg'))
             ->colors([
                 'primary' => Color::Amber,
             ])

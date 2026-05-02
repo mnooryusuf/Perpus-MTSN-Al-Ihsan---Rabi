@@ -582,7 +582,7 @@
                 <div class="login-form-wrapper">
                     {{-- Mobile brand --}}
                     <div class="login-mobile-brand">
-                        <img src="{{ asset('images/logo.png') }}" alt="Logo MTs Al-Ihsan">
+                        <img src="{{ asset('images/logo.jpg') }}" alt="Logo MTs Al-Ihsan">
                         <h2>Aplikasi Perpustakaan</h2>
                         <p>MTs Al-Ihsan Gambah Dalam Kandangan</p>
                     </div>
