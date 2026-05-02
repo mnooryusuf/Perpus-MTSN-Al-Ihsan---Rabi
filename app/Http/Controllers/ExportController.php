@@ -38,16 +38,16 @@ class ExportController extends Controller
     {
         return match ($type) {
             'buku' => [
-                'items' => Buku::orderBy('judul')->get(),
+                'items' => Buku::query()->orderBy('judul', 'asc')->get(),
                 'title' => 'Laporan Data Buku',
             ],
             'anggota' => [
-                'items' => Anggota::with('user')->get(),
+                'items' => Anggota::query()->with('user')->get(),
                 'title' => 'Laporan Data Anggota',
             ],
             'peminjaman' => [
-                'items' => Transaksi::with(['anggota.user', 'buku'])
-                    ->whereBetween('tanggal_pinjam', [$start, $end])
+                'items' => Transaksi::query()->with(['anggota.user', 'buku'])
+                    ->whereBetween('tanggal_pinjam', [$start, $end], 'and', false)
                     ->orderBy('tanggal_pinjam', 'desc')
                     ->get(),
                 'title' => 'Laporan Transaksi Peminjaman',
@@ -55,9 +55,9 @@ class ExportController extends Controller
                 'end'   => $end,
             ],
             'pengembalian' => [
-                'items' => Transaksi::with(['anggota.user', 'buku'])
-                    ->whereNotNull('tanggal_dikembalikan')
-                    ->whereBetween('tanggal_dikembalikan', [$start, $end])
+                'items' => Transaksi::query()->with(['anggota.user', 'buku'])
+                    ->whereNotNull('tanggal_dikembalikan', 'and', false)
+                    ->whereBetween('tanggal_dikembalikan', [$start, $end], 'and', false)
                     ->orderBy('tanggal_dikembalikan', 'desc')
                     ->get(),
                 'title' => 'Laporan Transaksi Pengembalian',

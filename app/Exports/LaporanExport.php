@@ -56,13 +56,13 @@ class LaporanRingkasanSheet implements FromCollection, WithHeadings, WithTitle, 
 
     public function collection(): Collection
     {
-        $totalBuku = Buku::sum('jumlah_eksemplar');
-        $totalPinjam = Transaksi::whereBetween('tanggal_pinjam', [$this->startDate, $this->endDate])->count();
-        $totalKembali = Transaksi::whereBetween('tanggal_dikembalikan', [$this->startDate, $this->endDate])->count();
-        $terlambat = Transaksi::whereNull('tanggal_dikembalikan')
+        $totalBuku = Buku::query()->sum('jumlah_eksemplar');
+        $totalPinjam = Transaksi::query()->whereBetween('tanggal_pinjam', [$this->startDate, $this->endDate], 'and', false)->count('*');
+        $totalKembali = Transaksi::query()->whereBetween('tanggal_dikembalikan', [$this->startDate, $this->endDate], 'and', false)->count('*');
+        $terlambat = Transaksi::query()->whereNull('tanggal_dikembalikan', 'and', false)
             ->where('tanggal_kembali', '<', now())
-            ->count();
-        $totalDenda = Transaksi::whereBetween('tanggal_dikembalikan', [$this->startDate, $this->endDate])
+            ->count('*');
+        $totalDenda = Transaksi::query()->whereBetween('tanggal_dikembalikan', [$this->startDate, $this->endDate], 'and', false)
             ->where('denda', '>', 0)
             ->sum('denda');
 
@@ -106,7 +106,6 @@ class LaporanRingkasanSheet implements FromCollection, WithHeadings, WithTitle, 
                 'alignment' => ['horizontal' => 'center'],
             ],
             5 => [
-                'font' => ['bold' => true],
                 'fill' => [
                     'fillType' => 'solid',
                     'startColor' => ['argb' => 'FF4472C4'],

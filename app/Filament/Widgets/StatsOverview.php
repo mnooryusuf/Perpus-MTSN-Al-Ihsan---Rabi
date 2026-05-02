@@ -14,23 +14,23 @@ class StatsOverview extends StatsOverviewWidget
 
     protected function getStats(): array
     {
-        $totalBuku = Buku::sum('jumlah_eksemplar');
-        $totalAnggota = Anggota::count();
-        $peminjamanAktif = Transaksi::where('status', 'dipinjam')->count();
-        $terlambat = Transaksi::where('status', 'dipinjam')
+        $totalBuku = Buku::query()->sum('jumlah_eksemplar');
+        $totalAnggota = Anggota::query()->count('*');
+        $peminjamanAktif = Transaksi::query()->where('status', 'dipinjam')->count('*');
+        $terlambat = Transaksi::query()->where('status', 'dipinjam')
             ->whereDate('tanggal_kembali', '<', now())
-            ->count();
-        $totalDenda = Transaksi::where('status', 'dikembalikan')
+            ->count('*');
+        $totalDenda = Transaksi::query()->where('status', 'dikembalikan')
             ->where('denda', '>', 0)
             ->sum('denda');
 
         // Peminjaman bulan ini vs bulan lalu untuk trend
-        $peminjamanBulanIni = Transaksi::whereMonth('tanggal_pinjam', now()->month)
-            ->whereYear('tanggal_pinjam', now()->year)
-            ->count();
-        $peminjamanBulanLalu = Transaksi::whereMonth('tanggal_pinjam', now()->subMonth()->month)
-            ->whereYear('tanggal_pinjam', now()->subMonth()->year)
-            ->count();
+        $peminjamanBulanIni = Transaksi::query()->whereMonth('tanggal_pinjam', '=', now()->month, 'and')
+            ->whereYear('tanggal_pinjam', '=', now()->year, 'and')
+            ->count('*');
+        $peminjamanBulanLalu = Transaksi::query()->whereMonth('tanggal_pinjam', '=', now()->subMonth()->month, 'and')
+            ->whereYear('tanggal_pinjam', '=', now()->subMonth()->year, 'and')
+            ->count('*');
 
         $trendPeminjaman = $peminjamanBulanLalu > 0
             ? round((($peminjamanBulanIni - $peminjamanBulanLalu) / $peminjamanBulanLalu) * 100)
