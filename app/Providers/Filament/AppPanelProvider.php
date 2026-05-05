@@ -41,8 +41,10 @@ class AppPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/App/Widgets'), for: 'App\Filament\App\Widgets')
             ->widgets([
-                AccountWidget::class,
-                FilamentInfoWidget::class,
+                \App\Filament\Widgets\WelcomeBanner::class,
+                \App\Filament\App\Widgets\DendaStats::class,
+                \App\Filament\App\Widgets\PeminjamanTerbaruMember::class,
+                \App\Filament\Widgets\BukuPopuler::class,
             ])
             ->middleware([
                 EncryptCookies::class,
