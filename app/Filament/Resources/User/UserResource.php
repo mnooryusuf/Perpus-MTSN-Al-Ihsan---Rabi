@@ -9,6 +9,7 @@ use App\Filament\Resources\User\Schemas\UserForm;
 use App\Filament\Resources\User\Tables\UserTable;
 use App\Models\User;
 use BackedEnum;
+use Illuminate\Support\Facades\Auth;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -30,7 +31,10 @@ class UserResource extends Resource
 
     public static function canViewAny(): bool
     {
-        return auth()->user()->role === 'admin';
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        return $user && $user->role === 'admin';
     }
 
     public static function form(Schema $schema): Schema
