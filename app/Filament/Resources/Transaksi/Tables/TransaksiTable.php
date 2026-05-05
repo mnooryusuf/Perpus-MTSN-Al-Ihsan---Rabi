@@ -8,6 +8,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Auth;
 
 class TransaksiTable
 {
@@ -17,6 +18,11 @@ class TransaksiTable
             ->columns([
                 TextColumn::make('anggota.nis_nip')
                     ->label('Anggota (NIS/NIP)')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('anggota.user.name')
+                    ->label('Nama Anggota')
+                    ->searchable()
                     ->sortable(),
                 TextColumn::make('buku.judul')
                     ->label('Judul Buku')
@@ -39,6 +45,7 @@ class TransaksiTable
                 TextColumn::make('status')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
+                        'booking'      => 'info',
                         'dipinjam'     => 'warning',
                         'dikembalikan' => 'success',
                         'terlambat'    => 'danger',
@@ -64,6 +71,22 @@ class TransaksiTable
                 //
             ])
             ->recordActions([
+                Action::make('konfirmasi')
+                    ->label('Konfirmasi Pinjam')
+                    ->icon('heroicon-o-hand-thumb-up')
+                    ->color('info')
+                    ->requiresConfirmation()
+                    ->modalHeading('Konfirmasi Peminjaman')
+                    ->modalDescription('Apakah buku sudah diserahkan ke siswa dan ingin mengubah status menjadi Dipinjam?')
+                    ->action(function ($record) {
+                        $record->update([
+                            'tanggal_pinjam' => now(),
+                            'tanggal_kembali' => now()->addDays(7), // Default 7 hari
+                            'status' => 'dipinjam',
+                            'id_user' => Auth::id(), // Pustakawan yang konfirmasi
+                        ]);
+                    })
+                    ->visible(fn ($record) => $record->status === 'booking'),
                 Action::make('kembalikan')
                     ->label('Kembalikan')
                     ->icon('heroicon-o-check-circle')

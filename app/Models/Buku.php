@@ -26,7 +26,7 @@ class Buku extends Model
     public function getAvailableStockAttribute()
     {
         $activeLoans = $this->transaksis()
-            ->whereIn('status', ['dipinjam', 'terlambat'])
+            ->whereIn('status', ['booking', 'dipinjam', 'terlambat'])
             ->count();
 
         return max(0, $this->jumlah_eksemplar - $activeLoans);

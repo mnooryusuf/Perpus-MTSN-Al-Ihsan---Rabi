@@ -24,8 +24,13 @@ class BukuTable
                 TextColumn::make('kategori')
                     ->searchable(),
                 TextColumn::make('jumlah_eksemplar')
+                    ->label('Total Stok')
                     ->numeric()
                     ->sortable(),
+                TextColumn::make('available_stock')
+                    ->label('Tersedia')
+                    ->badge()
+                    ->color(fn ($state) => $state > 0 ? 'success' : 'danger'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
