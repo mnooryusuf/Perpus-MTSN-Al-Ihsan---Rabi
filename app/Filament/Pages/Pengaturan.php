@@ -27,6 +27,11 @@ class Pengaturan extends Page implements HasForms
 
     protected string $view = 'filament.pages.pengaturan';
 
+    public static function canAccess(): bool
+    {
+        return true;
+    }
+
     // Use $data array with statePath for proper Filament component lifecycle
     public ?array $data = [];
 
