@@ -15,12 +15,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // 1. Create Pustakawan (Admin)
+        // 1. Create Admin
         User::updateOrCreate(
             ['username' => 'admin'],
             [
                 'name' => 'Administrator Puspus',
                 'email' => 'admin@perpus.com',
+                'password' => \Illuminate\Support\Facades\Hash::make('password'),
+                'role' => 'admin',
+            ]
+        );
+
+        // 1.5 Create Pustakawan
+        User::updateOrCreate(
+            ['username' => 'pustakawan'],
+            [
+                'name' => 'Petugas Perpustakaan',
+                'email' => 'pustakawan@perpus.com',
                 'password' => \Illuminate\Support\Facades\Hash::make('password'),
                 'role' => 'pustakawan',
             ]

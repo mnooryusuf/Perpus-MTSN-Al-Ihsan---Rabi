@@ -35,7 +35,7 @@ class UserForm
                     ->required(),
                 Select::make('role')
                     ->label('Peran / Jabatan')
-                    ->options(['pustakawan' => 'Pustakawan', 'siswa' => 'Siswa', 'guru' => 'Guru'])
+                    ->options(['admin' => 'Admin', 'pustakawan' => 'Pustakawan', 'siswa' => 'Siswa', 'guru' => 'Guru'])
                     ->default('pustakawan')
                     ->required(),
             ]);
