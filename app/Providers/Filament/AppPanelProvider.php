@@ -31,7 +31,7 @@ class AppPanelProvider extends PanelProvider
             ->brandLogo(fn () => view('filament.components.brand-logo'))
             ->favicon(asset('images/logo.jpg'))
             ->colors([
-                'primary' => Color::hex('#a2e4b8'),
+                'primary' => Color::hex('#166534'),
             ])
             ->discoverResources(in: app_path('Filament/App/Resources'), for: 'App\Filament\App\Resources')
             ->discoverPages(in: app_path('Filament/App/Pages'), for: 'App\Filament\App\Pages')
